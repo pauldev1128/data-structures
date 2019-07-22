@@ -1,11 +1,50 @@
 var BinarySearchTree = function(value) {
-  // add node
+  this.value = value;
+  this.right = null;
+  this.left = null;
+};
 
-  // contains
+BinarySearchTree.prototype.insert = function(value) {
+  if(this.value < value){
+    if(this.right === null) {
+      this.right = new BinarySearchTree(value);
+    } else {
+      this.right.insert(value);
+    }
 
-  // depth first log
+  } else {
+    if(this.left === null) {
+      this.left = new BinarySearchTree(value);
+    } else {
+      this.left.insert(value);
+    }
+  }
+};
 
-  // 
+
+BinarySearchTree.prototype.contains = function(value) {
+  if (this.value === value) {
+    return true;
+  } else {
+    // check if bigger than current val if y if n
+    if (this.value > value && this.left) {
+      return this.left.contains(value);
+    } else if (this.value < value && this.right) {
+      return this.right.contains(value);
+    } else {
+      return false;
+    }
+  }
+};
+
+BinarySearchTree.prototype.depthFirstLog = function(cb) {
+  cb(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(cb);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(cb);
+  }
 };
 
 
@@ -13,9 +52,6 @@ var BinarySearchTree = function(value) {
  * Complexity: What is the time complexity of the above functions?
  */
 
- // 1) max of two children
- //  2) child right bigger child left smaller
- // check if is bigger than property 
 
 
 
